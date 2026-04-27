@@ -74,7 +74,7 @@ describe('ADSR', () => {
     env.noteOn()
     const retriggered = new Float32Array(1)
     env.process(retriggered)
-    // The first sample after retrigger should be near levelBeforeRetrigger, not 0
-    expect(retriggered[0]).toBeGreaterThan(levelBeforeRetrigger * 0.8)
+    // First sample after retrigger must equal captured level (attackStartLevel * t where t=0)
+    expect(retriggered[0]).toBeCloseTo(levelBeforeRetrigger, 1)
   })
 })
