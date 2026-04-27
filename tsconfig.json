@@ -18,13 +18,15 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "types": ["vitest/globals"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
       "@core/*": ["src/core/*"],
       "@ui/*": ["src/ui/*"],
       "@effects/*": ["src/effects/*"],
-      "@instruments/*": ["src/instruments/*"]
+      "@instruments/*": ["src/instruments/*"],
+      "@dsp/*": ["src/dsp/*"]
     }
   },
   "include": ["src", "vite.config.ts"],
