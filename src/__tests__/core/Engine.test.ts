@@ -2,7 +2,8 @@ import { describe, it, expect, vi } from 'vitest'
 import { Engine } from '@core/Engine'
 import { Project } from '@core/Project'
 import { Location, Duration, TimeSignature } from '@core/Common'
-import { TransportEvent, TransportEventType } from '@core/Events'
+import { TransportEvent, TransportEventType, TrackEvent, TrackEventType } from '@core/Events'
+import { AudioTrack } from '@core/AudioTrack'
 
 function makeMockContext(currentTime = 0) {
   return {
@@ -50,5 +51,31 @@ describe('Engine.adjustBpm', () => {
         new TransportEvent(TransportEventType.BpmChanged, undefined, 90),
       )
     }).not.toThrow()
+  })
+})
+
+describe('Engine.handleTrackEvent mute/solo', () => {
+  it('calls project.updateTrackEnablement when a track is muted', () => {
+    const ctx = makeMockContext()
+    const project = new Project()
+    const spy = vi.spyOn(project, 'updateTrackEnablement')
+    const engine = new Engine(ctx, { bufferSize: 128, sampleRate: 44100 }, project)
+
+    const track = new AudioTrack([], [], 'Test', '#aaa', false, false, false)
+    engine.handleTrackEvent(new TrackEvent(TrackEventType.Muted, track))
+
+    expect(spy).toHaveBeenCalled()
+  })
+
+  it('calls project.updateTrackEnablement when a track is soloed', () => {
+    const ctx = makeMockContext()
+    const project = new Project()
+    const spy = vi.spyOn(project, 'updateTrackEnablement')
+    const engine = new Engine(ctx, { bufferSize: 128, sampleRate: 44100 }, project)
+
+    const track = new AudioTrack([], [], 'Test', '#aaa', false, false, false)
+    engine.handleTrackEvent(new TrackEvent(TrackEventType.Soloed, track))
+
+    expect(spy).toHaveBeenCalled()
   })
 })

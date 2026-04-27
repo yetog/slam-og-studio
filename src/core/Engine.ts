@@ -598,10 +598,10 @@ export class Engine {
         event.track.deinitializeAudio();
         break;
       case TrackEventType.Muted:
-        // TODO
+        this._project.updateTrackEnablement();
         break;
       case TrackEventType.Soloed:
-        // TODO
+        this._project.updateTrackEnablement();
         break;
       case TrackEventType.DelayChanged:
         // TODO
