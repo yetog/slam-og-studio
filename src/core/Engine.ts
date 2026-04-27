@@ -74,9 +74,13 @@ export class Engine {
    * @param onComplete Completion callback function.
    */
   public async initialize(onComplete: () => void) {
-    const baseUrl = import.meta.env.BASE_URL
-    await this.context.audioWorklet.addModule(`${baseUrl}worklets/base-processor.js`)
-    await this.context.audioWorklet.addModule(`${baseUrl}worklets/dsp-processor.js`)
+    try {
+      const baseUrl = import.meta.env.BASE_URL
+      await this.context.audioWorklet.addModule(`${baseUrl}worklets/base-processor.js`)
+      await this.context.audioWorklet.addModule(`${baseUrl}worklets/dsp-processor.js`)
+    } catch (e) {
+      console.warn('AudioWorklet modules failed to load:', e)
+    }
     this._metronome.prepareInContext(this.context, onComplete);
   }
 
