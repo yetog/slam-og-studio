@@ -43,6 +43,7 @@ export class Project implements NamedObject, ToJson, AudioFileResolver {
   ) {
     this.tracks = tracks;
     this.audioFiles = audioFiles;
+    this._locationToTime = this.createLocationToTime();
 
     this.updateTrackEnablement();
   }
@@ -175,13 +176,18 @@ export class Project implements NamedObject, ToJson, AudioFileResolver {
     }
   }
 
-  private _locationToTime: LocationToTime = this.createLocationToTime();
+  private _locationToTime: LocationToTime;
 
   /**
    * Create a conversation object from arrangement locations to a time in seconds.
    */
   public get locationToTime(): LocationToTime {
     return this._locationToTime;
+  }
+
+  public updateBpm(bpm: number): void {
+    this.bpm = bpm;
+    this._locationToTime = this.createLocationToTime();
   }
 
   private createLocationToTime() {
@@ -199,11 +205,11 @@ export class Project implements NamedObject, ToJson, AudioFileResolver {
       (location.tick - 1) * factor.ticks;
 
     let timeToLocation = (time: number) => {
-      let bar = Math.floor(time / factor.bars) + 1;
+      let bar = Math.floor(time / factor.bars + 1e-10) + 1;
       time -= (bar - 1) * factor.bars;
-      let beat = Math.floor(time / factor.beats) + 1;
+      let beat = Math.floor(time / factor.beats + 1e-10) + 1;
       time -= (beat - 1) * factor.beats;
-      let tick = Math.floor(time / factor.ticks) + 1;
+      let tick = Math.floor(time / factor.ticks + 1e-10) + 1;
       return new Location(bar, beat, tick);
     };
 
