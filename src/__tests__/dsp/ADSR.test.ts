@@ -58,4 +58,23 @@ describe('ADSR', () => {
     env.process(buf)
     expect(env.isActive).toBe(false)
   })
+
+  it('noteOn during release smoothly ramps up (no click)', () => {
+    const env = new ADSR(SR, { attack: 0.01, decay: 0.001, sustain: 0.8, release: 0.1 })
+    env.noteOn()
+    // Let it reach sustain
+    const preBuf = new Float32Array(Math.ceil(0.015 * SR))
+    env.process(preBuf)
+    env.noteOff()
+    // Let it decay partway through release
+    const releasePart = new Float32Array(Math.ceil(0.02 * SR))
+    env.process(releasePart)
+    const levelBeforeRetrigger = releasePart[releasePart.length - 1]
+    // Retrigger — first sample must not be 0 (that would be a click)
+    env.noteOn()
+    const retriggered = new Float32Array(1)
+    env.process(retriggered)
+    // The first sample after retrigger should be near levelBeforeRetrigger, not 0
+    expect(retriggered[0]).toBeGreaterThan(levelBeforeRetrigger * 0.8)
+  })
 })
