@@ -75,6 +75,7 @@ export class Metronome implements PlaybackScheduling, NamedObject, MutableObject
     const context = this._audioState.gain.context;
 
     const buffer = this._audioFile.buffer;
+    if (buffer === null) return;  // audio file not loaded, skip click silently
     const node = context.createBufferSource();
     node.detune.value = bar ? 700 : 0;
     node.buffer = buffer;
