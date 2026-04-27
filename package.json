@@ -12,7 +12,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "test": "vitest",
     "test:run": "vitest run",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "generate-test-audio": "node scripts/generate-test-audio.mjs"
   },
   "dependencies": {
     "@blueprintjs/core": "^5.7.1",
