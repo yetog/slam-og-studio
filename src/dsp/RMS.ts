@@ -4,6 +4,7 @@ export class RMS {
   private sumOfSquares = 0
 
   constructor(private readonly windowSize: number) {
+    if (windowSize <= 0) throw new RangeError(`windowSize must be > 0, got ${windowSize}`)
     this.buffer = new Float32Array(windowSize)
   }
 
@@ -13,6 +14,13 @@ export class RMS {
       this.sumOfSquares += sample * sample - old * old
       this.buffer[this.writePos] = sample
       this.writePos = (this.writePos + 1) % this.windowSize
+    }
+    // Periodic full recompute every window revolution to bound floating-point drift
+    if (this.writePos === 0) {
+      this.sumOfSquares = 0
+      for (let i = 0; i < this.windowSize; i++) {
+        this.sumOfSquares += this.buffer[i] * this.buffer[i]
+      }
     }
     const rms = Math.sqrt(Math.max(0, this.sumOfSquares / this.windowSize))
     return rms < 1e-10 ? -Infinity : 20 * Math.log10(rms)
