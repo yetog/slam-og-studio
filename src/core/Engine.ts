@@ -76,6 +76,7 @@ export class Engine {
   public async initialize(onComplete: () => void) {
     const baseUrl = import.meta.env.BASE_URL
     await this.context.audioWorklet.addModule(`${baseUrl}worklets/base-processor.js`)
+    await this.context.audioWorklet.addModule(`${baseUrl}worklets/dsp-processor.js`)
     this._metronome.prepareInContext(this.context, onComplete);
   }
 

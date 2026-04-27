@@ -8,7 +8,7 @@ export class Oscillator {
   constructor(private readonly sampleRate: number) {}
 
   setFrequency(hz: number): void {
-    this.phaseIncrement = (2 * Math.PI * hz) / this.sampleRate
+    this.phaseIncrement = (2 * Math.PI * Math.max(0, hz)) / this.sampleRate
   }
 
   setType(type: WaveType): void {
