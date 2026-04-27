@@ -18,10 +18,10 @@ describe('Oscillator', () => {
     osc.setType('sine')
     osc.setFrequency(440)
     const samplesPerCycle = Math.round(SAMPLE_RATE / 440)
-    const buf = new Float32Array(samplesPerCycle)
+    // Process one full cycle + 1 sample; the extra sample starts the next cycle at phase ≈ 0
+    const buf = new Float32Array(samplesPerCycle + 1)
     osc.process(buf)
-    // One cycle later, phase is back near 0 → sin ≈ 0
-    expect(buf[samplesPerCycle - 1]).toBeCloseTo(0, 1)
+    expect(buf[samplesPerCycle]).toBeCloseTo(0, 1)
   })
 
   it('sine: peak amplitude is 1', () => {
