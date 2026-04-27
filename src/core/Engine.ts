@@ -536,9 +536,23 @@ export class Engine {
     this.looping = looping;
   }
 
-  private adjustBpm(bpm: number): never {
-    // Not implemented yet
-    throw new Error('Method not implemented.');
+  private adjustBpm(bpm: number): void {
+    this._project.updateBpm(bpm);
+    const converter = this._project.locationToTime;
+
+    this._loopStartTime = converter.convertLocation(this.loopStart);
+    this._loopEndTime = converter.convertLocation(
+      this.loopEnd.sub(new Duration(0, 0, 1), this._project.timeSignature),
+    );
+    this._endTime = converter.convertLocation(
+      this.end.sub(new Duration(0, 0, 1), this._project.timeSignature),
+    );
+
+    if (this._playing) {
+      const newCurrentTime = converter.convertLocation(this._project.current);
+      this.currentTime = newCurrentTime;
+      this._timeOffset = this.context.currentTime - newCurrentTime;
+    }
   }
 
   /**
