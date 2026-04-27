@@ -1,0 +1,45 @@
+{
+  "name": "slam-og-studio",
+  "version": "0.1.0",
+  "description": "Professional Web-Based Digital Audio Workstation by SLAM OG LLC",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
+  },
+  "dependencies": {
+    "@blueprintjs/core": "^5.7.1",
+    "@blueprintjs/icons": "^5.4.1",
+    "@blueprintjs/select": "^5.0.19",
+    "@blueprintjs/table": "^5.0.19",
+    "@popperjs/core": "^2.11.8",
+    "@uiw/react-color-compact": "^2.0.5",
+    "data-structure-typed": "^1.50.2",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "use-force-update": "^1.0.11"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.0",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "postcss": "^8.4.33",
+    "prettier": "^3.2.4",
+    "sass": "^1.70.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
+  }
+}
