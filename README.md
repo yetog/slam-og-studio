@@ -1,19 +1,53 @@
 # SLAM OG Studio
 
-> AI-Powered Web-Based Digital Audio Workstation
+> Professional Web-Based Digital Audio Workstation
+> A SLAM OG LLC Product
 
-A next-generation DAW that combines professional audio production capabilities with AI-assisted workflow for music creation, mixing, and mastering.
+A next-generation web DAW built for professional music production with a focus on workflow, UI/UX, and eventually AI-assisted features.
 
 ---
 
 ## Vision
 
-SLAM OG Studio aims to democratize music production by providing:
+SLAM OG Studio is a **DAW-first** project. The core functionality must work flawlessly before any AI features are added.
 
-- **Professional DAW Features** - Multi-track recording, MIDI editing, mixing, mastering
-- **AI Music Generation** - Powered by Eleven Labs for creative assistance
-- **Intelligent Mixing Suggestions** - Real-time analysis with actionable feedback
-- **Project Management** - AI-guided workflow to keep productions on track
+**Phase 1 (MVP)**: Professional Web DAW
+- Multi-track audio/MIDI recording and editing
+- Built-in instruments (synth, sampler, drum machine)
+- Professional effects chain (EQ, compression, reverb, delay)
+- Piano roll, mixer, and arrangement views
+- Project save/load and audio export
+
+**Phase 2 (Enhancement)**: AI Integration
+- Eleven Labs for music generation assistance
+- Intelligent mixing suggestions
+- Project management AI
+
+---
+
+## Branding
+
+SLAM OG Studio follows the [SLAM OG LLC Brand Guidelines](docs/BRAND.md).
+
+### Color Palette
+
+| Token | Hex | Use |
+|-------|-----|-----|
+| Background | `#050505` | Page background |
+| Surface | `#151515` | Cards, panels |
+| Primary (Gold) | `#C9A24A` | CTAs, accents |
+| App Accent (Cyan) | `#5FD2D6` | App-specific highlights |
+| Foreground | `#F8F6F0` | Text |
+| Border | `#262626` | Dividers |
+
+### Typography
+
+- **Display**: Cinzel (serif) for headings
+- **Body**: Inter (sans) for UI and text
+
+### App Theme
+
+Uses the `.theme-app` sub-theme with HUD-style elements inspired by Final Fantasy VII Rebirth. Cyan accent complements gold primary.
 
 ---
 
@@ -23,9 +57,9 @@ SLAM OG Studio aims to democratize music production by providing:
 |-------|------------|
 | **Frontend** | React 18 + TypeScript + Vite |
 | **Audio Engine** | Web Audio API + AudioWorklets |
-| **AI Backend** | Eleven Labs (generation) + Claude API (analysis) |
 | **DSP** | Custom TypeScript DSP library |
-| **Styling** | Tailwind CSS + Custom theme |
+| **Styling** | Tailwind CSS + SLAM OG theme |
+| **AI** | Eleven Labs (Phase 2) |
 
 ---
 
@@ -43,16 +77,11 @@ SLAM OG Studio
 │   ├── Delay, Reverb, EQ
 │   ├── Compressor, Limiter
 │   └── Stereo Tools
-├── AI Integration
-│   ├── Audio Analyzer (FFT, RMS, LUFS)
-│   ├── Mix Suggestions (rule-based + AI)
-│   ├── Eleven Labs (music generation)
-│   └── Project Assistant (Claude)
 └── UI Components
     ├── Arrangement View
     ├── Piano Roll
     ├── Mixer
-    └── AI Assistant Panel
+    └── Transport Controls
 ```
 
 ---
@@ -61,35 +90,14 @@ SLAM OG Studio
 
 | Phase | Focus | Status |
 |-------|-------|--------|
-| 1 | Foundation (setup, Vite migration) | Planning |
-| 2 | Audio Engine (core, DSP, worklets) | Planning |
-| 3 | Instruments & Effects | Planning |
-| 4 | UI Polish (piano roll, mixer) | Planning |
-| 5 | AI Integration | Planning |
-| 6 | Deploy & Polish | Planning |
+| 1 | Foundation & Branding | In Progress |
+| 2 | Audio Engine (Core DAW) | Planned |
+| 3 | Instruments & Effects | Planned |
+| 4 | UI/UX (Piano Roll, Mixer) | Planned |
+| 5 | Testing & Deploy | Planned |
+| 6 | AI Integration (Post-MVP) | Future |
 
-See [docs/SLAM_OG_STUDIO_DEVELOPMENT.md](docs/SLAM_OG_STUDIO_DEVELOPMENT.md) for detailed step-by-step plan.
-
----
-
-## AI Features
-
-### Music Generation (Eleven Labs)
-- Generate melodies, chord progressions, drum patterns
-- Style-based generation (genre presets)
-- Variation creation from existing material
-
-### Mixing Suggestions
-- Real-time frequency analysis
-- Stereo field monitoring
-- Loudness metering (LUFS)
-- One-click auto-fix for common issues
-
-### Project Assistant
-- Genre-based production checklists
-- Progress tracking
-- Next-step recommendations
-- Creative guidance via chat
+See [docs/SLAM_OG_STUDIO_DEVELOPMENT.md](docs/SLAM_OG_STUDIO_DEVELOPMENT.md) for detailed plan.
 
 ---
 
@@ -129,18 +137,18 @@ npm run build
 
 ```
 slam-og-studio/
-├── docs/                    # Documentation & plans
-│   ├── AI_DAW_PLAN.md       # Architecture & feature plan
-│   └── SLAM_OG_STUDIO_DEVELOPMENT.md  # Step-by-step dev guide
-├── research/                # Reference materials
-├── src/                     # Source code (coming soon)
-│   ├── core/                # Audio engine
-│   ├── dsp/                 # DSP utilities
-│   ├── instruments/         # Synths, samplers
-│   ├── effects/             # Audio effects
-│   ├── ai/                  # AI integration
-│   └── ui/                  # React components
-├── public/                  # Static assets
+├── docs/
+│   ├── BRAND.md                      # SLAM OG LLC brand guidelines
+│   ├── AI_DAW_PLAN.md                # Architecture analysis
+│   └── SLAM_OG_STUDIO_DEVELOPMENT.md # Step-by-step dev guide
+├── research/                          # Reference materials
+├── src/                               # Source code (coming soon)
+│   ├── core/                          # Audio engine
+│   ├── dsp/                           # DSP utilities
+│   ├── instruments/                   # Synths, samplers
+│   ├── effects/                       # Audio effects
+│   └── ui/                            # React components
+├── public/                            # Static assets
 └── README.md
 ```
 
@@ -148,24 +156,28 @@ slam-og-studio/
 
 ## Roadmap
 
-- [ ] Phase 1: Foundation setup
-- [ ] Phase 2: Core audio engine
-- [ ] Phase 3: Basic instruments & effects
-- [ ] Phase 4: Piano roll & mixer UI
-- [ ] Phase 5: Eleven Labs integration
-- [ ] Phase 6: Production deployment
+### MVP (DAW Functionality)
+- [ ] Fork WebDAW and apply SLAM OG branding
+- [ ] Migrate to Vite
+- [ ] Implement core audio engine
+- [ ] Port instruments from openDAW
+- [ ] Port effects from openDAW
+- [ ] Build piano roll editor
+- [ ] Build mixer panel
+- [ ] Audio export (WAV/MP3)
+- [ ] Project save/load
+- [ ] Production deploy
 
----
-
-## Contributing
-
-This is a personal project by Isayah Young-Burke. Contributions welcome once the foundation is complete.
+### Post-MVP (AI Features)
+- [ ] Eleven Labs music generation
+- [ ] Mix analysis and suggestions
+- [ ] Project management assistant
 
 ---
 
 ## License
 
-MIT License - See LICENSE file for details.
+MIT License
 
 ---
 
@@ -173,9 +185,8 @@ MIT License - See LICENSE file for details.
 
 - [WebDAW](https://github.com/ai-music/webdaw) by Hans-Martin Will
 - [openDAW](https://github.com/andremichelle/openDAW) by Andre Michelle
-- [Eleven Labs](https://elevenlabs.io/) for AI audio generation
-- [Anthropic](https://anthropic.com/) for Claude AI
+- [SLAM OG LLC](https://slamogllc.com) brand system
 
 ---
 
-*Built with passion for music and AI.*
+*Infrastructure. Intelligence. Impact.*

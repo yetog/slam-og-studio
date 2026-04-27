@@ -16,10 +16,10 @@ Build a web-based DAW that combines:
 ## Phase 1: Foundation Setup (Core Infrastructure)
 
 ### 1.1 Fork & Rebrand WebDAW
-- [ ] Fork webdaw as `zay-daw` or custom name
+- [ ] Fork webdaw as `slam-og-studio` or custom name
 - [ ] Replace Blueprint.js branding with custom theme
 - [ ] Update package.json, README, license attribution
-- [ ] Set up as new app in portfolio (`apps/zay-daw/`, port 3021)
+- [ ] Set up as new app in portfolio (`apps/slam-og-studio/`, port 3021)
 
 ### 1.2 Upgrade Build System
 - [ ] Migrate from Create React App to Vite (faster builds, better HMR)
@@ -28,7 +28,7 @@ Build a web-based DAW that combines:
 
 ### 1.3 Project Structure
 ```
-apps/zay-daw/
+apps/slam-og-studio/
 ├── src/
 │   ├── core/           # Audio engine (from webdaw)
 │   ├── dsp/            # DSP utilities (from openDAW lib-dsp)

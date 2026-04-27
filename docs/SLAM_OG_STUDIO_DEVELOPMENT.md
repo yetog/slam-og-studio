@@ -1,6 +1,6 @@
 # SLAM OG Studio - Step-by-Step Development Plan
 
-> Web-based AI-powered DAW with hybrid intelligence
+> Professional Web DAW with SLAM OG LLC Branding
 > Version: 1.0 | Started: 2026-04-27
 
 ---
@@ -8,21 +8,30 @@
 ## Project Overview
 
 **Name**: SLAM OG Studio
+**Brand**: SLAM OG LLC (see [BRAND.md](BRAND.md))
 **Base**: WebDAW (minimal UI framework)
-**Features**: openDAW DSP/instruments + AI assistance
-**AI Backend**: Hybrid (Eleven Labs + Local ONNX + Claude API)
+**Features**: openDAW DSP/instruments + Professional mixing workflow
+**AI Backend**: Eleven Labs (Phase 2, after DAW is functional)
 **Port**: 3021 (when deployed)
+
+---
+
+## Development Priority
+
+> **DAW FUNCTIONALITY FIRST**
+> The DAW must work fully as a professional web-based production tool before
+> any AI features are added. AI is a Phase 2 enhancement, not MVP.
 
 ---
 
 ## Development Phases
 
-### Phase 1: Foundation (Weeks 1-2)
-### Phase 2: Audio Engine (Weeks 3-5)
-### Phase 3: Instruments & Effects (Weeks 6-8)
-### Phase 4: UI Polish (Weeks 9-10)
-### Phase 5: AI Integration (Weeks 11-14)
-### Phase 6: Polish & Deploy (Weeks 15-16)
+### Phase 1: Foundation & Branding
+### Phase 2: Audio Engine (Core DAW)
+### Phase 3: Instruments & Effects
+### Phase 4: UI/UX Polish (Piano Roll, Mixer, Arrangement)
+### Phase 5: Testing & Production Deploy
+### Phase 6: AI Integration (Post-MVP)
 
 ---
 
