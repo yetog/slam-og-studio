@@ -88,12 +88,22 @@ export class AudioFile implements NamedObject, Identifiable, ToJson {
           `Fetched audio file ${file.name} with response ${response.status} ${response.statusText}`,
         );
 
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status} ${response.statusText}`);
+        }
+
         // TODO: Should decoding sit on a work thread?
-        context.decodeAudioData(await response.arrayBuffer(), (buffer) => {
-          console.log(`Decoded audio file ${file.name}`);
-          file._audioBuffer = buffer;
-          callback(file);
-        });
+        context.decodeAudioData(
+          await response.arrayBuffer(),
+          (buffer) => {
+            console.log(`Decoded audio file ${file.name}`);
+            file._audioBuffer = buffer;
+            callback(file);
+          },
+          (err) => {
+            onError(file, new Error(err?.message ?? 'Failed to decode audio data'));
+          },
+        );
       } catch (err: any) {
         console.error(`Unable to fetch the audio file. Error: ${err.message}`);
         onError(file, err);
