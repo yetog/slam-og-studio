@@ -67,6 +67,7 @@ class DspProcessor extends AudioWorkletProcessor {
     super()
     this.osc = new Oscillator(sampleRate)
     this.filter = new BiquadFilter(sampleRate)
+    this._oscBuf = new Float32Array(128)  // pre-allocated; avoids GC in audio thread
     this.osc.setFrequency(440)
 
     this.port.onmessage = (e) => {
@@ -98,9 +99,9 @@ class DspProcessor extends AudioWorkletProcessor {
     const output = outputs[0]
     if (!output || !output[0]) return true
     const ch = output[0]
-    const osc = new Float32Array(ch.length)
-    this.osc.process(osc)
-    this.filter.process(osc, ch)
+    const buf = ch.length <= 128 ? this._oscBuf : new Float32Array(ch.length)
+    this.osc.process(buf.subarray(0, ch.length))
+    this.filter.process(buf.subarray(0, ch.length), ch)
     // Copy mono output to all channels
     for (let c = 1; c < output.length; c++) output[c].set(ch)
     return true
