@@ -15,8 +15,14 @@ export class BiquadFilter {
   }
 
   setType(type: FilterType): void { this.type = type; this.updateCoefficients() }
-  setCutoff(hz: number): void { this.cutoff = hz; this.updateCoefficients() }
-  setQ(q: number): void { this.q = q; this.updateCoefficients() }
+  setCutoff(hz: number): void {
+    this.cutoff = Math.max(1, Math.min(hz, this.sampleRate / 2 - 1))
+    this.updateCoefficients()
+  }
+  setQ(q: number): void {
+    this.q = Math.max(0.0001, q)
+    this.updateCoefficients()
+  }
 
   process(input: Float32Array, output: Float32Array): void {
     for (let i = 0; i < input.length; i++) {
@@ -64,6 +70,8 @@ export class BiquadFilter {
         b0 = 1; b1 = -2 * cosW0; b2 = 1
         a0 = 1 + alpha; a1 = -2 * cosW0; a2 = 1 - alpha
         break
+      default:
+        throw new Error(`Unknown filter type: ${this.type as string}`)
     }
 
     this.b0 = b0 / a0; this.b1 = b1 / a0; this.b2 = b2 / a0

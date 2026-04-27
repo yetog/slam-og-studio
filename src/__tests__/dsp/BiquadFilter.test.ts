@@ -62,13 +62,23 @@ describe('BiquadFilter', () => {
     const filter = new BiquadFilter(SR)
     filter.setType('lowpass')
     filter.setCutoff(1000)
-    const input = sineSignal(440, 256)
-    const out1 = new Float32Array(256)
+    const input = sineSignal(440, 512)
+
+    // First pass — builds up filter state
+    const out1 = new Float32Array(512)
     filter.process(input, out1)
     filter.reset()
-    const out2 = new Float32Array(256)
-    filter.process(input, out2)
-    // After reset, outputs should match (same starting state)
-    expect(out1[0]).toBeCloseTo(out2[0], 5)
+
+    // After reset, re-processing same input from scratch should match a fresh filter
+    const filterFresh = new BiquadFilter(SR)
+    filterFresh.setType('lowpass')
+    filterFresh.setCutoff(1000)
+    const out2 = new Float32Array(512)
+    filterFresh.process(input, out2)
+    const outAfterReset = new Float32Array(512)
+    filter.process(input, outAfterReset)
+
+    // Mid-buffer samples must match the fresh filter (state is equal after reset)
+    expect(outAfterReset[256]).toBeCloseTo(out2[256], 5)
   })
 })
