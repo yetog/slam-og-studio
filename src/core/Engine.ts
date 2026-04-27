@@ -74,6 +74,8 @@ export class Engine {
    * @param onComplete Completion callback function.
    */
   public async initialize(onComplete: () => void) {
+    const baseUrl = import.meta.env.BASE_URL
+    await this.context.audioWorklet.addModule(`${baseUrl}worklets/base-processor.js`)
     this._metronome.prepareInContext(this.context, onComplete);
   }
 
